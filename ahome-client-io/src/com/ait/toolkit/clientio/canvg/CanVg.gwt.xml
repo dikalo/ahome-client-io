@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module>
+ <inherits name='com.emitrom.flash4j.core.Core'/>
+   <script src='rgbcolor.js' />
+    <script src='StackBlur.js' />
+     <script src='canvg.js' />
+</module>
