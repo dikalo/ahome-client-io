@@ -28,25 +28,29 @@ import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.core.client.JsArray;
 import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.event.shared.HandlerRegistration;
-import com.google.gwt.user.client.Window;
 
 public class ClientIO {
 
 	static final String MESSAGE = "File was successfully created. Click HERE to save.";
 	static final String BROWSE_MESSAGE = "File access successful. Click HERE to open.";
-	private static final String FLASH_NOT_INSTALLED = "ClientIO can't start because Flash seems not be installed !";
-	private static final String CLIENT_IO_NOT_INITIALIZED = "Client IO was not initialized. Make sure you call the init method before any action";
+	static final String FLASH_NOT_INSTALLED = "ClientIO can't start because Flash seems not be installed !";
+	static final String CLIENT_IO_NOT_INITIALIZED = "Client IO was not initialized. Make sure you call the init method before any action";
 	private static boolean wasInitiated = false;
 	private static EventHandler saveCompleteHandler;
 	private static EventHandler ioErrorHandler;
+	private static final DefaultInitCallkack initCallback = new DefaultInitCallkack();
 
 	private ClientIO() {
 
 	}
 
 	public static void init() {
+		init(initCallback);
+	}
+
+	public static void init(ClientIOInitCallback callback) {
 		if (!Flash.isInstalled()) {
-			Window.alert(FLASH_NOT_INSTALLED);
+			initCallback.onInitError();
 			return;
 		}
 		if (!wasInitiated) {
@@ -55,41 +59,38 @@ public class ClientIO {
 		}
 	}
 
-	public static final void saveFile(ByteArray data, String fileName,
-			String message) {
+	public static final void saveFile(ByteArray data, String fileName, String message) {
 		if (wasInitiated) {
 			ClientIO.setLabel(message);
 			_saveFile(data.getJsObj(), fileName);
 			ClientIOInfoBox.display();
 			setFileSaveHandlers();
 		} else {
-			Window.alert(CLIENT_IO_NOT_INITIALIZED);
+			initCallback.onInitError();
 		}
 
 	}
 
-	public static final void saveFile(ByteArray data, String fileName,
-			String message, int closeDelay) {
+	public static final void saveFile(ByteArray data, String fileName, String message, int closeDelay) {
 		if (wasInitiated) {
 			ClientIO.setLabel(message);
 			_saveFile(data.getJsObj(), fileName);
 			ClientIOInfoBox.display(closeDelay);
 			setFileSaveHandlers();
 		} else {
-			Window.alert(CLIENT_IO_NOT_INITIALIZED);
+			initCallback.onInitError();
 		}
 
 	}
 
-	public static final void saveFile(ByteArray data, String fileName,
-			String message, int closeDelay, int top, int left) {
+	public static final void saveFile(ByteArray data, String fileName, String message, int closeDelay, int top, int left) {
 		if (wasInitiated) {
 			ClientIO.setLabel(message);
 			_saveFile(data.getJsObj(), fileName);
 			ClientIOInfoBox.display(closeDelay, top, left);
 			setFileSaveHandlers();
 		} else {
-			Window.alert(CLIENT_IO_NOT_INITIALIZED);
+			initCallback.onInitError();
 		}
 
 	}
@@ -101,71 +102,66 @@ public class ClientIO {
 			ClientIOInfoBox.display();
 			setFileSaveHandlers();
 		} else {
-			Window.alert(CLIENT_IO_NOT_INITIALIZED);
+			initCallback.onInitError();
 		}
 	}
 
-	public static final void saveFile(ByteArray data, String fileName,
-			int closeDelay) {
+	public static final void saveFile(ByteArray data, String fileName, int closeDelay) {
 		if (wasInitiated) {
 			ClientIO.setLabel(MESSAGE);
 			_saveFile(data.getJsObj(), fileName);
 			ClientIOInfoBox.display(closeDelay);
 			setFileSaveHandlers();
 		} else {
-			Window.alert(CLIENT_IO_NOT_INITIALIZED);
+			initCallback.onInitError();
 		}
 
 	}
 
-	public static final void saveFile(ByteArray data, String fileName,
-			int closeDelay, int top, int left) {
+	public static final void saveFile(ByteArray data, String fileName, int closeDelay, int top, int left) {
 		if (wasInitiated) {
 			ClientIO.setLabel(MESSAGE);
 			_saveFile(data.getJsObj(), fileName);
 			ClientIOInfoBox.display(closeDelay, top, left);
 			setFileSaveHandlers();
 		} else {
-			Window.alert(CLIENT_IO_NOT_INITIALIZED);
+			initCallback.onInitError();
 		}
 
 	}
 
-	public static final void saveFile(String data, String fileName,
-			String message) {
+	public static final void saveFile(String data, String fileName, String message) {
 		if (wasInitiated) {
 			ClientIO.setLabel(message);
 			_saveFile(data, fileName);
 			ClientIOInfoBox.display();
 			setFileSaveHandlers();
 		} else {
-			Window.alert(CLIENT_IO_NOT_INITIALIZED);
+			initCallback.onInitError();
 		}
 
 	}
 
-	public static final void saveFile(String data, String fileName,
-			String message, int closeDelay) {
+	public static final void saveFile(String data, String fileName, String message, int closeDelay) {
 		if (wasInitiated) {
 			ClientIO.setLabel(message);
 			_saveFile(data, fileName);
 			ClientIOInfoBox.display(closeDelay);
 			setFileSaveHandlers();
 		} else {
-			Window.alert(CLIENT_IO_NOT_INITIALIZED);
+			initCallback.onInitError();
 		}
 
 	}
 
-	public static final void saveFile(String data, String fileName,
-			String message, int closeDelay, int top, int left) {
+	public static final void saveFile(String data, String fileName, String message, int closeDelay, int top, int left) {
 		if (wasInitiated) {
 			ClientIO.setLabel(message);
 			_saveFile(data, fileName);
 			ClientIOInfoBox.display(closeDelay, top, left);
 			setFileSaveHandlers();
 		} else {
-			Window.alert(CLIENT_IO_NOT_INITIALIZED);
+			initCallback.onInitError();
 		}
 
 	}
@@ -177,95 +173,88 @@ public class ClientIO {
 			ClientIOInfoBox.display();
 			setFileSaveHandlers();
 		} else {
-			Window.alert(CLIENT_IO_NOT_INITIALIZED);
+			initCallback.onInitError();
 		}
 
 	}
 
-	public static final void saveFile(String data, String fileName, int top,
-			int left) {
+	public static final void saveFile(String data, String fileName, int top, int left) {
 		if (wasInitiated) {
 			ClientIO.setLabel(MESSAGE);
 			_saveFile(data, fileName);
 			ClientIOInfoBox.display(top, left);
 			setFileSaveHandlers();
 		} else {
-			Window.alert(CLIENT_IO_NOT_INITIALIZED);
+			initCallback.onInitError();
 		}
 
 	}
 
-	public static final void saveFile(String data, String fileName,
-			int closeDelay) {
+	public static final void saveFile(String data, String fileName, int closeDelay) {
 		if (wasInitiated) {
 			ClientIO.setLabel(MESSAGE);
 			_saveFile(data, fileName);
 			ClientIOInfoBox.display(closeDelay);
 			setFileSaveHandlers();
 		} else {
-			Window.alert(CLIENT_IO_NOT_INITIALIZED);
+			initCallback.onInitError();
 		}
 
 	}
 
-	public static final void saveFile(String data, String fileName,
-			int closeDelay, int top, int left) {
+	public static final void saveFile(String data, String fileName, int closeDelay, int top, int left) {
 		if (wasInitiated) {
 			ClientIO.setLabel(MESSAGE);
 			_saveFile(data, fileName);
 			ClientIOInfoBox.display(closeDelay, top, left);
 			setFileSaveHandlers();
 		} else {
-			Window.alert(CLIENT_IO_NOT_INITIALIZED);
+			initCallback.onInitError();
 		}
 
 	}
 
-	public static final FileReference browse(String message,
-			List<FileFilter> fileFilter) {
+	public static final FileReference browse(String message, List<FileFilter> fileFilter) {
 		if (wasInitiated) {
 			ClientIO.setLabel(message);
 			_setFilter(fromListOfFileFilter(fileFilter));
 			ClientIOInfoBox.display();
 			return getFileReference();
 		}
-		Window.alert(CLIENT_IO_NOT_INITIALIZED);
+		initCallback.onInitError();
 		return null;
 	}
 
-	public static final FileReference browse(String message,
-			List<FileFilter> fileFilter, int top, int left) {
+	public static final FileReference browse(String message, List<FileFilter> fileFilter, int top, int left) {
 		if (wasInitiated) {
 			ClientIO.setLabel(message);
 			_setFilter(fromListOfFileFilter(fileFilter));
 			ClientIOInfoBox.display(top, left);
 			return getFileReference();
 		}
-		Window.alert(CLIENT_IO_NOT_INITIALIZED);
+		initCallback.onInitError();
 		return null;
 	}
 
-	public static final FileReference browse(String message,
-			List<FileFilter> fileFilter, int closeDelay) {
+	public static final FileReference browse(String message, List<FileFilter> fileFilter, int closeDelay) {
 		if (wasInitiated) {
 			ClientIO.setLabel(message);
 			_setFilter(fromListOfFileFilter(fileFilter));
 			ClientIOInfoBox.display(closeDelay);
 			return getFileReference();
 		}
-		Window.alert(CLIENT_IO_NOT_INITIALIZED);
+		initCallback.onInitError();
 		return null;
 	}
 
-	public static final FileReference browse(String message,
-			List<FileFilter> fileFilter, int top, int left, int closeDelay) {
+	public static final FileReference browse(String message, List<FileFilter> fileFilter, int top, int left, int closeDelay) {
 		if (wasInitiated) {
 			ClientIO.setLabel(message);
 			_setFilter(fromListOfFileFilter(fileFilter));
 			ClientIOInfoBox.display(top, left, closeDelay);
 			return getFileReference();
 		}
-		Window.alert(CLIENT_IO_NOT_INITIALIZED);
+		initCallback.onInitError();
 		return null;
 	}
 
@@ -273,73 +262,75 @@ public class ClientIO {
 		return browse(BROWSE_MESSAGE, fileFilter);
 	}
 
-	public static final FileReference browse(List<FileFilter> fileFilter,
-			int top, int left) {
+	public static final FileReference browse(List<FileFilter> fileFilter, int top, int left) {
 		return browse(BROWSE_MESSAGE, fileFilter, top, left);
 	}
 
-	public static final FileReference browse(List<FileFilter> fileFilter,
-			int closeDelay) {
+	public static final FileReference browse(List<FileFilter> fileFilter, int closeDelay) {
 		return browse(BROWSE_MESSAGE, fileFilter, closeDelay);
 	}
 
-	public static final FileReference browse(List<FileFilter> fileFilter,
-			int top, int left, int closeDelay) {
+	public static final FileReference browse(List<FileFilter> fileFilter, int top, int left, int closeDelay) {
 		return browse(BROWSE_MESSAGE, fileFilter, top, left, closeDelay);
 	}
 
-	public static final FileReference browse(String message,
-			FileFilter... fileFilter) {
+	public static final FileReference browse(String message, FileFilter... fileFilter) {
 		if (wasInitiated) {
 			ClientIO.setLabel(message);
 			_setFilter(fromListOfFileFilter(Arrays.asList(fileFilter)));
 			return getFileReference();
 		}
-		Window.alert(CLIENT_IO_NOT_INITIALIZED);
+		initCallback.onInitError();
 		return null;
 	}
 
-	public static final FileReference browse(String message, int top, int left,
-			FileFilter... fileFilter) {
+	public static final FileReference browse(String message, int top, int left, FileFilter... fileFilter) {
 		if (wasInitiated) {
 			ClientIO.setLabel(message);
 			_setFilter(fromListOfFileFilter(Arrays.asList(fileFilter)));
 			ClientIOInfoBox.display(top, left);
 			return getFileReference();
 		}
-		Window.alert(CLIENT_IO_NOT_INITIALIZED);
+		initCallback.onInitError();
 		return null;
 	}
 
-	public static final FileReference browse(String message, int closeDelay,
-			FileFilter... fileFilter) {
+	public static final FileReference browse(String message, int closeDelay, FileFilter... fileFilter) {
 		if (wasInitiated) {
 			ClientIO.setLabel(message);
 			_setFilter(fromListOfFileFilter(Arrays.asList(fileFilter)));
 			return getFileReference();
 		}
-		Window.alert(CLIENT_IO_NOT_INITIALIZED);
+		initCallback.onInitError();
 		return null;
 	}
 
-	public static final FileReference browse(String message, int top, int left,
-			int closeDelay, FileFilter... fileFilter) {
+	public static final FileReference browse(String message, int top, int left, int closeDelay, FileFilter... fileFilter) {
 		if (wasInitiated) {
 			ClientIO.setLabel(message);
 			_setFilter(fromListOfFileFilter(Arrays.asList(fileFilter)));
 			ClientIOInfoBox.display(top, left, closeDelay);
 			return getFileReference();
 		}
-		Window.alert(CLIENT_IO_NOT_INITIALIZED);
+		initCallback.onInitError();
 		return null;
+	}
+
+	public static final FileReference browse() {
+		FileFilter fileFilter = new FileFilter("Open a file", "*");
+		return browse(BROWSE_MESSAGE, fileFilter);
+	}
+
+	public static final FileReference browse(String message) {
+		FileFilter fileFilter = new FileFilter(message, "*");
+		return browse(BROWSE_MESSAGE, fileFilter);
 	}
 
 	public static final FileReference browse(FileFilter... fileFilter) {
 		return browse(BROWSE_MESSAGE, fileFilter);
 	}
 
-	public static final FileReference browse(int closeDelay,
-			FileFilter... fileFilter) {
+	public static final FileReference browse(int closeDelay, FileFilter... fileFilter) {
 		return browse(BROWSE_MESSAGE, closeDelay, fileFilter);
 	}
 
@@ -347,7 +338,7 @@ public class ClientIO {
 		if (wasInitiated) {
 			ClientIOSwf.get().setBackgroundColor(value);
 		} else {
-			Window.alert(CLIENT_IO_NOT_INITIALIZED);
+			initCallback.onInitError();
 		}
 	}
 
@@ -355,7 +346,7 @@ public class ClientIO {
 		if (wasInitiated) {
 			ClientIOSwf.get().setSaveText(value);
 		} else {
-			Window.alert(CLIENT_IO_NOT_INITIALIZED);
+			initCallback.onInitError();
 		}
 	}
 
@@ -363,7 +354,7 @@ public class ClientIO {
 		if (wasInitiated) {
 			ClientIOSwf.get().setFontColor(value);
 		} else {
-			Window.alert(CLIENT_IO_NOT_INITIALIZED);
+			initCallback.onInitError();
 		}
 	}
 
@@ -371,7 +362,7 @@ public class ClientIO {
 		if (wasInitiated) {
 			ClientIOSwf.get().setFontSize(value);
 		} else {
-			Window.alert(CLIENT_IO_NOT_INITIALIZED);
+			initCallback.onInitError();
 		}
 	}
 
@@ -379,8 +370,7 @@ public class ClientIO {
 		ClientIOBus.fireEvent(event);
 	}
 
-	public static <H extends FileCreateHandler> HandlerRegistration addFileCreateHandler(
-			H handler) {
+	public static <H extends FileCreateHandler> HandlerRegistration addFileCreateHandler(H handler) {
 		return ClientIOBus.addFileCreateHandler(handler);
 	}
 
@@ -388,7 +378,7 @@ public class ClientIO {
 		if (wasInitiated) {
 			saveCompleteHandler = handler;
 		} else {
-			Window.alert(CLIENT_IO_NOT_INITIALIZED);
+			initCallback.onInitError();
 		}
 	}
 
@@ -396,7 +386,7 @@ public class ClientIO {
 		if (wasInitiated) {
 			ioErrorHandler = handler;
 		} else {
-			Window.alert(CLIENT_IO_NOT_INITIALIZED);
+			initCallback.onInitError();
 		}
 	}
 
