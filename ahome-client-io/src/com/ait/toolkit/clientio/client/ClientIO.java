@@ -66,7 +66,7 @@ public class ClientIO {
 			ClientIOInfoBox.display();
 			setFileSaveHandlers();
 		} else {
-			initCallback.onInitError();
+			initCallback.onIOError();
 		}
 
 	}
@@ -78,7 +78,7 @@ public class ClientIO {
 			ClientIOInfoBox.display(closeDelay);
 			setFileSaveHandlers();
 		} else {
-			initCallback.onInitError();
+			initCallback.onIOError();
 		}
 
 	}
@@ -90,7 +90,7 @@ public class ClientIO {
 			ClientIOInfoBox.display(closeDelay, top, left);
 			setFileSaveHandlers();
 		} else {
-			initCallback.onInitError();
+			initCallback.onIOError();
 		}
 
 	}
@@ -102,7 +102,7 @@ public class ClientIO {
 			ClientIOInfoBox.display();
 			setFileSaveHandlers();
 		} else {
-			initCallback.onInitError();
+			initCallback.onIOError();
 		}
 	}
 
@@ -113,7 +113,7 @@ public class ClientIO {
 			ClientIOInfoBox.display(closeDelay);
 			setFileSaveHandlers();
 		} else {
-			initCallback.onInitError();
+			initCallback.onIOError();
 		}
 
 	}
@@ -125,7 +125,7 @@ public class ClientIO {
 			ClientIOInfoBox.display(closeDelay, top, left);
 			setFileSaveHandlers();
 		} else {
-			initCallback.onInitError();
+			initCallback.onIOError();
 		}
 
 	}
@@ -137,7 +137,7 @@ public class ClientIO {
 			ClientIOInfoBox.display();
 			setFileSaveHandlers();
 		} else {
-			initCallback.onInitError();
+			initCallback.onIOError();
 		}
 
 	}
@@ -149,7 +149,7 @@ public class ClientIO {
 			ClientIOInfoBox.display(closeDelay);
 			setFileSaveHandlers();
 		} else {
-			initCallback.onInitError();
+			initCallback.onIOError();
 		}
 
 	}
@@ -161,7 +161,7 @@ public class ClientIO {
 			ClientIOInfoBox.display(closeDelay, top, left);
 			setFileSaveHandlers();
 		} else {
-			initCallback.onInitError();
+			initCallback.onIOError();
 		}
 
 	}
@@ -173,7 +173,7 @@ public class ClientIO {
 			ClientIOInfoBox.display();
 			setFileSaveHandlers();
 		} else {
-			initCallback.onInitError();
+			initCallback.onIOError();
 		}
 
 	}
@@ -185,7 +185,7 @@ public class ClientIO {
 			ClientIOInfoBox.display(top, left);
 			setFileSaveHandlers();
 		} else {
-			initCallback.onInitError();
+			initCallback.onIOError();
 		}
 
 	}
@@ -197,7 +197,7 @@ public class ClientIO {
 			ClientIOInfoBox.display(closeDelay);
 			setFileSaveHandlers();
 		} else {
-			initCallback.onInitError();
+			initCallback.onIOError();
 		}
 
 	}
@@ -209,7 +209,7 @@ public class ClientIO {
 			ClientIOInfoBox.display(closeDelay, top, left);
 			setFileSaveHandlers();
 		} else {
-			initCallback.onInitError();
+			initCallback.onIOError();
 		}
 
 	}
@@ -221,7 +221,7 @@ public class ClientIO {
 			ClientIOInfoBox.display();
 			return getFileReference();
 		}
-		initCallback.onInitError();
+		initCallback.onIOError();
 		return null;
 	}
 
@@ -232,7 +232,7 @@ public class ClientIO {
 			ClientIOInfoBox.display(top, left);
 			return getFileReference();
 		}
-		initCallback.onInitError();
+		initCallback.onIOError();
 		return null;
 	}
 
@@ -243,7 +243,7 @@ public class ClientIO {
 			ClientIOInfoBox.display(closeDelay);
 			return getFileReference();
 		}
-		initCallback.onInitError();
+		initCallback.onIOError();
 		return null;
 	}
 
@@ -254,7 +254,7 @@ public class ClientIO {
 			ClientIOInfoBox.display(top, left, closeDelay);
 			return getFileReference();
 		}
-		initCallback.onInitError();
+		initCallback.onIOError();
 		return null;
 	}
 
@@ -280,7 +280,7 @@ public class ClientIO {
 			_setFilter(fromListOfFileFilter(Arrays.asList(fileFilter)));
 			return getFileReference();
 		}
-		initCallback.onInitError();
+		initCallback.onIOError();
 		return null;
 	}
 
@@ -291,7 +291,7 @@ public class ClientIO {
 			ClientIOInfoBox.display(top, left);
 			return getFileReference();
 		}
-		initCallback.onInitError();
+		initCallback.onIOError();
 		return null;
 	}
 
@@ -301,7 +301,7 @@ public class ClientIO {
 			_setFilter(fromListOfFileFilter(Arrays.asList(fileFilter)));
 			return getFileReference();
 		}
-		initCallback.onInitError();
+		initCallback.onIOError();
 		return null;
 	}
 
@@ -312,7 +312,7 @@ public class ClientIO {
 			ClientIOInfoBox.display(top, left, closeDelay);
 			return getFileReference();
 		}
-		initCallback.onInitError();
+		initCallback.onIOError();
 		return null;
 	}
 
@@ -338,7 +338,7 @@ public class ClientIO {
 		if (wasInitiated) {
 			ClientIOSwf.get().setBackgroundColor(value);
 		} else {
-			initCallback.onInitError();
+			initCallback.onIOError();
 		}
 	}
 
@@ -346,7 +346,7 @@ public class ClientIO {
 		if (wasInitiated) {
 			ClientIOSwf.get().setSaveText(value);
 		} else {
-			initCallback.onInitError();
+			initCallback.onIOError();
 		}
 	}
 
@@ -354,7 +354,7 @@ public class ClientIO {
 		if (wasInitiated) {
 			ClientIOSwf.get().setFontColor(value);
 		} else {
-			initCallback.onInitError();
+			initCallback.onIOError();
 		}
 	}
 
@@ -362,7 +362,7 @@ public class ClientIO {
 		if (wasInitiated) {
 			ClientIOSwf.get().setFontSize(value);
 		} else {
-			initCallback.onInitError();
+			initCallback.onIOError();
 		}
 	}
 
@@ -378,7 +378,7 @@ public class ClientIO {
 		if (wasInitiated) {
 			saveCompleteHandler = handler;
 		} else {
-			initCallback.onInitError();
+			initCallback.onIOError();
 		}
 	}
 
@@ -386,7 +386,7 @@ public class ClientIO {
 		if (wasInitiated) {
 			ioErrorHandler = handler;
 		} else {
-			initCallback.onInitError();
+			initCallback.onIOError();
 		}
 	}
 
