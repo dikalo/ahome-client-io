@@ -6,17 +6,12 @@ package com.ait.toolkit.clientio.client;
  * @author Alain Ekambi
  * 
  */
-public interface ClientIOInitCallback {
+public interface ClientIOInitHandler {
 
 	/**
 	 * Called when an I/O operation ends with no errors.
 	 */
-	public void onIOSuccess();
-
-	/**
-	 * Called when an I/O operation ends with errors.
-	 */
-	public void onIOError();
+	public void onInit();
 
 	/**
 	 * called when Client IO could not get initialized.

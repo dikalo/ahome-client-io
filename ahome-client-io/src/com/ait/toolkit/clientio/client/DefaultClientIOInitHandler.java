@@ -8,16 +8,11 @@ import com.google.gwt.user.client.Window;
  * @author Alain Ekambi
  * 
  */
-public class DefaultInitCallkack implements ClientIOInitCallback {
+public class DefaultClientIOInitHandler implements ClientIOInitHandler {
 
 	@Override
-	public void onIOSuccess() {
+	public void onInit() {
 
-	}
-
-	@Override
-	public void onIOError() {
-		Window.alert(ClientIO.CLIENT_IO_NOT_INITIALIZED);
 	}
 
 	@Override

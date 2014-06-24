@@ -23,7 +23,7 @@ import com.google.gwt.user.client.ui.Widget;
 /**
  * The ClientIOWidget class is responsible of bootstrapping the client side file access api
  */
-public class ClientIOWidget {
+class ClientIOWidget {
 
 	private static final String PATH = Util.getModuleBaseUrl() + "clientio/ClientIO.swf";
 	private static final String BRIDGE_NAME = "Flash4j";

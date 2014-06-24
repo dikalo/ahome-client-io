@@ -20,7 +20,7 @@ import com.ait.toolkit.flash.core.client.framework.Bridge;
 import com.ait.toolkit.flash.core.client.net.FileReference;
 import com.google.gwt.core.client.JavaScriptObject;
 
-public class ClientIOSwf extends Application {
+class ClientIOSwf extends Application {
 
 	private static final ClientIOSwf INSTANCE = new ClientIOSwf();
 
@@ -33,8 +33,7 @@ public class ClientIOSwf extends Application {
 	}
 
 	/**
-	 * Get the unique instance of the top most Sprite object of the underlying
-	 * swf
+	 * Get the unique instance of the top most Sprite object of the underlying swf
 	 * 
 	 * @return
 	 */

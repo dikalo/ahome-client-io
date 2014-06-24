@@ -16,9 +16,13 @@
 package com.ait.toolkit.clientio.client;
 
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
+import com.ait.toolkit.flash.core.client.events.CallbackRegistration;
 import com.ait.toolkit.flash.core.client.events.Event;
+import com.ait.toolkit.flash.core.client.events.IOErrorEvent;
 import com.ait.toolkit.flash.core.client.events.handlers.EventHandler;
 import com.ait.toolkit.flash.core.client.net.FileFilter;
 import com.ait.toolkit.flash.core.client.net.FileReference;
@@ -27,8 +31,13 @@ import com.ait.toolkit.flash.core.client.utils.ByteArray;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.core.client.JsArray;
 import com.google.gwt.event.shared.GwtEvent;
-import com.google.gwt.event.shared.HandlerRegistration;
 
+/**
+ * Main I/O class. Export some Flash File API to GWT.
+ * 
+ * @author Alain Ekambi
+ * 
+ */
 public class ClientIO {
 
 	static final String MESSAGE = "File was successfully created. Click HERE to save.";
@@ -36,27 +45,27 @@ public class ClientIO {
 	static final String FLASH_NOT_INSTALLED = "ClientIO can't start because Flash seems not be installed !";
 	static final String CLIENT_IO_NOT_INITIALIZED = "Client IO was not initialized. Make sure you call the init method before any action";
 	private static boolean wasInitiated = false;
-	private static EventHandler saveCompleteHandler;
-	private static EventHandler ioErrorHandler;
-	private static final DefaultInitCallkack initCallback = new DefaultInitCallkack();
+	private static ClientIOInitHandler defaultInitHandler = new DefaultClientIOInitHandler();
+	static Set<CallbackRegistration> ioCallbackRegistrations = new HashSet<CallbackRegistration>();
 
 	private ClientIO() {
 
 	}
 
-	public static void init() {
-		init(initCallback);
-	}
-
-	public static void init(ClientIOInitCallback callback) {
+	public static void init(ClientIOInitHandler initHandler) {
 		if (!Flash.isInstalled()) {
-			initCallback.onInitError();
+			initHandler.onInitError();
 			return;
 		}
 		if (!wasInitiated) {
 			ClientIOInfoBox.get();
+			initHandler.onInit();
 			wasInitiated = true;
 		}
+	}
+
+	public static void init() {
+		init(defaultInitHandler);
 	}
 
 	public static final void saveFile(ByteArray data, String fileName, String message) {
@@ -64,9 +73,6 @@ public class ClientIO {
 			ClientIO.setLabel(message);
 			_saveFile(data.getJsObj(), fileName);
 			ClientIOInfoBox.display();
-			setFileSaveHandlers();
-		} else {
-			initCallback.onIOError();
 		}
 
 	}
@@ -76,9 +82,6 @@ public class ClientIO {
 			ClientIO.setLabel(message);
 			_saveFile(data.getJsObj(), fileName);
 			ClientIOInfoBox.display(closeDelay);
-			setFileSaveHandlers();
-		} else {
-			initCallback.onIOError();
 		}
 
 	}
@@ -88,11 +91,7 @@ public class ClientIO {
 			ClientIO.setLabel(message);
 			_saveFile(data.getJsObj(), fileName);
 			ClientIOInfoBox.display(closeDelay, top, left);
-			setFileSaveHandlers();
-		} else {
-			initCallback.onIOError();
 		}
-
 	}
 
 	public static final void saveFile(ByteArray data, String fileName) {
@@ -100,9 +99,6 @@ public class ClientIO {
 			ClientIO.setLabel(MESSAGE);
 			_saveFile(data.getJsObj(), fileName);
 			ClientIOInfoBox.display();
-			setFileSaveHandlers();
-		} else {
-			initCallback.onIOError();
 		}
 	}
 
@@ -111,9 +107,6 @@ public class ClientIO {
 			ClientIO.setLabel(MESSAGE);
 			_saveFile(data.getJsObj(), fileName);
 			ClientIOInfoBox.display(closeDelay);
-			setFileSaveHandlers();
-		} else {
-			initCallback.onIOError();
 		}
 
 	}
@@ -123,9 +116,6 @@ public class ClientIO {
 			ClientIO.setLabel(MESSAGE);
 			_saveFile(data.getJsObj(), fileName);
 			ClientIOInfoBox.display(closeDelay, top, left);
-			setFileSaveHandlers();
-		} else {
-			initCallback.onIOError();
 		}
 
 	}
@@ -135,9 +125,6 @@ public class ClientIO {
 			ClientIO.setLabel(message);
 			_saveFile(data, fileName);
 			ClientIOInfoBox.display();
-			setFileSaveHandlers();
-		} else {
-			initCallback.onIOError();
 		}
 
 	}
@@ -147,9 +134,6 @@ public class ClientIO {
 			ClientIO.setLabel(message);
 			_saveFile(data, fileName);
 			ClientIOInfoBox.display(closeDelay);
-			setFileSaveHandlers();
-		} else {
-			initCallback.onIOError();
 		}
 
 	}
@@ -159,9 +143,6 @@ public class ClientIO {
 			ClientIO.setLabel(message);
 			_saveFile(data, fileName);
 			ClientIOInfoBox.display(closeDelay, top, left);
-			setFileSaveHandlers();
-		} else {
-			initCallback.onIOError();
 		}
 
 	}
@@ -171,9 +152,6 @@ public class ClientIO {
 			ClientIO.setLabel(MESSAGE);
 			_saveFile(data, fileName);
 			ClientIOInfoBox.display();
-			setFileSaveHandlers();
-		} else {
-			initCallback.onIOError();
 		}
 
 	}
@@ -183,11 +161,7 @@ public class ClientIO {
 			ClientIO.setLabel(MESSAGE);
 			_saveFile(data, fileName);
 			ClientIOInfoBox.display(top, left);
-			setFileSaveHandlers();
-		} else {
-			initCallback.onIOError();
 		}
-
 	}
 
 	public static final void saveFile(String data, String fileName, int closeDelay) {
@@ -195,9 +169,6 @@ public class ClientIO {
 			ClientIO.setLabel(MESSAGE);
 			_saveFile(data, fileName);
 			ClientIOInfoBox.display(closeDelay);
-			setFileSaveHandlers();
-		} else {
-			initCallback.onIOError();
 		}
 
 	}
@@ -207,164 +178,130 @@ public class ClientIO {
 			ClientIO.setLabel(MESSAGE);
 			_saveFile(data, fileName);
 			ClientIOInfoBox.display(closeDelay, top, left);
-			setFileSaveHandlers();
-		} else {
-			initCallback.onIOError();
 		}
 
 	}
 
-	public static final FileReference browse(String message, List<FileFilter> fileFilter) {
+	public static void browse(String message, List<FileFilter> fileFilter) {
 		if (wasInitiated) {
 			ClientIO.setLabel(message);
 			_setFilter(fromListOfFileFilter(fileFilter));
 			ClientIOInfoBox.display();
-			return getFileReference();
 		}
-		initCallback.onIOError();
-		return null;
 	}
 
-	public static final FileReference browse(String message, List<FileFilter> fileFilter, int top, int left) {
+	public static void browse(String message, List<FileFilter> fileFilter, int top, int left) {
 		if (wasInitiated) {
 			ClientIO.setLabel(message);
 			_setFilter(fromListOfFileFilter(fileFilter));
 			ClientIOInfoBox.display(top, left);
-			return getFileReference();
 		}
-		initCallback.onIOError();
-		return null;
 	}
 
-	public static final FileReference browse(String message, List<FileFilter> fileFilter, int closeDelay) {
+	public static void browse(String message, List<FileFilter> fileFilter, int closeDelay) {
 		if (wasInitiated) {
 			ClientIO.setLabel(message);
 			_setFilter(fromListOfFileFilter(fileFilter));
 			ClientIOInfoBox.display(closeDelay);
-			return getFileReference();
 		}
-		initCallback.onIOError();
-		return null;
 	}
 
-	public static final FileReference browse(String message, List<FileFilter> fileFilter, int top, int left, int closeDelay) {
+	public static void browse(String message, List<FileFilter> fileFilter, int top, int left, int closeDelay) {
 		if (wasInitiated) {
 			ClientIO.setLabel(message);
 			_setFilter(fromListOfFileFilter(fileFilter));
 			ClientIOInfoBox.display(top, left, closeDelay);
-			return getFileReference();
 		}
-		initCallback.onIOError();
-		return null;
 	}
 
-	public static final FileReference browse(List<FileFilter> fileFilter) {
-		return browse(BROWSE_MESSAGE, fileFilter);
+	public static void browse(List<FileFilter> fileFilter) {
+		browse(BROWSE_MESSAGE, fileFilter);
 	}
 
-	public static final FileReference browse(List<FileFilter> fileFilter, int top, int left) {
-		return browse(BROWSE_MESSAGE, fileFilter, top, left);
+	public static void browse(List<FileFilter> fileFilter, int top, int left) {
+		browse(BROWSE_MESSAGE, fileFilter, top, left);
 	}
 
-	public static final FileReference browse(List<FileFilter> fileFilter, int closeDelay) {
-		return browse(BROWSE_MESSAGE, fileFilter, closeDelay);
+	public static void browse(List<FileFilter> fileFilter, int closeDelay) {
+		browse(BROWSE_MESSAGE, fileFilter, closeDelay);
 	}
 
-	public static final FileReference browse(List<FileFilter> fileFilter, int top, int left, int closeDelay) {
-		return browse(BROWSE_MESSAGE, fileFilter, top, left, closeDelay);
+	public static void browse(List<FileFilter> fileFilter, int top, int left, int closeDelay) {
+		browse(BROWSE_MESSAGE, fileFilter, top, left, closeDelay);
 	}
 
-	public static final FileReference browse(String message, FileFilter... fileFilter) {
+	public static void browse(String message, FileFilter... fileFilter) {
 		if (wasInitiated) {
 			ClientIO.setLabel(message);
 			_setFilter(fromListOfFileFilter(Arrays.asList(fileFilter)));
 			ClientIOInfoBox.display();
-			return getFileReference();
 		}
-		initCallback.onIOError();
-		return null;
+
 	}
 
-	public static final FileReference browse(String message, int top, int left, FileFilter... fileFilter) {
+	public static void browse(String message, int top, int left, FileFilter... fileFilter) {
 		if (wasInitiated) {
 			ClientIO.setLabel(message);
 			_setFilter(fromListOfFileFilter(Arrays.asList(fileFilter)));
 			ClientIOInfoBox.display(top, left);
-			return getFileReference();
 		}
-		initCallback.onIOError();
-		return null;
 	}
 
-	public static final FileReference browse(String message, int closeDelay, FileFilter... fileFilter) {
+	public static void browse(String message, int closeDelay, FileFilter... fileFilter) {
 		if (wasInitiated) {
 			ClientIO.setLabel(message);
 			_setFilter(fromListOfFileFilter(Arrays.asList(fileFilter)));
 			ClientIOInfoBox.display();
-			return getFileReference();
 		}
-		initCallback.onIOError();
-		return null;
 	}
 
-	public static final FileReference browse(String message, int top, int left, int closeDelay, FileFilter... fileFilter) {
+	public static void browse(String message, int top, int left, int closeDelay, FileFilter... fileFilter) {
 		if (wasInitiated) {
 			ClientIO.setLabel(message);
 			_setFilter(fromListOfFileFilter(Arrays.asList(fileFilter)));
 			ClientIOInfoBox.display(top, left, closeDelay);
-			return getFileReference();
 		}
-		initCallback.onIOError();
-		return null;
 	}
 
-	public static final FileReference browse() {
+	public static void browse() {
 		FileFilter fileFilter = new FileFilter("Open a file", "*");
-		return browse(BROWSE_MESSAGE, fileFilter);
+		browse(BROWSE_MESSAGE, fileFilter);
 	}
 
-	public static final FileReference browse(String message) {
+	public static void browse(String message) {
 		FileFilter fileFilter = new FileFilter(message, "*");
-		return browse(message, fileFilter);
+		browse(message, fileFilter);
 	}
 
-	public static final FileReference browse(FileFilter... fileFilter) {
-		return browse(BROWSE_MESSAGE, fileFilter);
+	public static void browse(FileFilter... fileFilter) {
+		browse(BROWSE_MESSAGE, fileFilter);
 	}
 
-	public static final FileReference browse(int closeDelay, FileFilter... fileFilter) {
-		return browse(BROWSE_MESSAGE, closeDelay, fileFilter);
+	public static void browse(int closeDelay, FileFilter... fileFilter) {
+		browse(BROWSE_MESSAGE, closeDelay, fileFilter);
 	}
 
 	public static void setBackgroundColor(String value) {
 		if (wasInitiated) {
 			ClientIOSwf.get().setBackgroundColor(value);
-		} else {
-			initCallback.onIOError();
 		}
 	}
 
 	public static void setLabel(String value) {
 		if (wasInitiated) {
 			ClientIOSwf.get().setSaveText(value);
-		} else {
-			initCallback.onIOError();
 		}
 	}
 
 	public static void setFontColor(String value) {
 		if (wasInitiated) {
 			ClientIOSwf.get().setFontColor(value);
-		} else {
-			initCallback.onIOError();
 		}
 	}
 
 	public static void setFontSize(int value) {
 		if (wasInitiated) {
 			ClientIOSwf.get().setFontSize(value);
-		} else {
-			initCallback.onIOError();
 		}
 	}
 
@@ -372,34 +309,48 @@ public class ClientIO {
 		ClientIOBus.fireEvent(event);
 	}
 
-	public static <H extends FileCreateHandler> HandlerRegistration addFileCreateHandler(H handler) {
-		return ClientIOBus.addFileCreateHandler(handler);
+	public static void addCallbackRegistration(CallbackRegistration cb) {
+		ioCallbackRegistrations.add(cb);
 	}
 
-	private static void setSaveCompleteHandler(EventHandler handler) {
-		if (wasInitiated) {
-			saveCompleteHandler = handler;
-		} else {
-			initCallback.onIOError();
+	public static void clearCallbackRegistration() {
+		for (CallbackRegistration cb : ioCallbackRegistrations) {
+			cb.removeHandler();
 		}
+		ioCallbackRegistrations.clear();
 	}
 
-	private static void setIoErrorHandler(EventHandler handler) {
-		if (wasInitiated) {
-			ioErrorHandler = handler;
-		} else {
-			initCallback.onIOError();
-		}
-	}
+	public static void addFileSelectHandler(final ClientIoFileSelectHandler handler) {
+		final FileReference fr = getFileReference();
+		if (fr != null) {
+			clearCallbackRegistration();
+			addCallbackRegistration(fr.addEventHandler(Event.SELECT, new EventHandler() {
+				@Override
+				public void onEvent(Event event) {
 
-	static void setFileSaveHandlers() {
-		ClientIOBus.fireEvent(new FileCreateEvent());
-		FileReference fileReference = ClientIOSwf.get().getSaveFileReference();
-		if (fileReference != null && saveCompleteHandler != null) {
-			fileReference.addEventHandler(Event.COMPLETE, saveCompleteHandler);
-		}
-		if (fileReference != null && ioErrorHandler != null) {
-			fileReference.addEventHandler("ioError", ioErrorHandler);
+					addCallbackRegistration(fr.addEventHandler(Event.COMPLETE, new EventHandler() {
+						@Override
+						public void onEvent(Event event) {
+							ByteArray data = fr.getData();
+							handler.onFileLoaded(data);
+						}
+					}));
+					addCallbackRegistration(fr.addEventHandler(IOErrorEvent.IO_ERROR, new EventHandler() {
+						@Override
+						public void onEvent(Event event) {
+							handler.onIoError();
+						}
+					}));
+
+					fr.load();
+				}
+			}));
+			addCallbackRegistration(fr.addEventHandler(Event.CANCEL, new EventHandler() {
+				@Override
+				public void onEvent(Event event) {
+					handler.onCancel();
+				}
+			}));
 		}
 	}
 
@@ -421,6 +372,9 @@ public class ClientIO {
 	private static native FileReference getFileReference()/*-{
 		var root = $wnd.FABridge["Flash4j"].root();
 		var obj = root.getbrowseFileRef();
+		if (!obj) {
+			return null;
+		}
 		return @com.ait.toolkit.flash.core.client.net.FileReference::new(Lcom/google/gwt/core/client/JavaScriptObject;)(obj);
 	}-*/;
 
