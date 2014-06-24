@@ -278,6 +278,7 @@ public class ClientIO {
 		if (wasInitiated) {
 			ClientIO.setLabel(message);
 			_setFilter(fromListOfFileFilter(Arrays.asList(fileFilter)));
+			ClientIOInfoBox.display();
 			return getFileReference();
 		}
 		initCallback.onIOError();
@@ -299,6 +300,7 @@ public class ClientIO {
 		if (wasInitiated) {
 			ClientIO.setLabel(message);
 			_setFilter(fromListOfFileFilter(Arrays.asList(fileFilter)));
+			ClientIOInfoBox.display();
 			return getFileReference();
 		}
 		initCallback.onIOError();
@@ -323,7 +325,7 @@ public class ClientIO {
 
 	public static final FileReference browse(String message) {
 		FileFilter fileFilter = new FileFilter(message, "*");
-		return browse(BROWSE_MESSAGE, fileFilter);
+		return browse(message, fileFilter);
 	}
 
 	public static final FileReference browse(FileFilter... fileFilter) {

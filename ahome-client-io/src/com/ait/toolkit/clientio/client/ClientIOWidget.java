@@ -16,7 +16,7 @@
 package com.ait.toolkit.clientio.client;
 
 import com.ait.toolkit.core.client.Util;
-import com.ait.toolkit.flash.widget.client.StartHandler;
+import com.ait.toolkit.flash.widget.client.SwfLoadHandler;
 import com.ait.toolkit.flash.widget.client.loader.SwfWidgetLoader;
 import com.google.gwt.user.client.ui.Widget;
 
@@ -42,7 +42,7 @@ public class ClientIOWidget {
 	 *            , the handler to be called once the flash widget was successfully loaded
 	 * @return, the widget to be added
 	 */
-	static Widget create(int width, int height, StartHandler handler) {
+	static Widget create(int width, int height, SwfLoadHandler handler) {
 		return SwfWidgetLoader.initAsWidget(PATH, width, height, BRIDGE_NAME, true, handler);
 	}
 
@@ -53,14 +53,14 @@ public class ClientIOWidget {
 	 *            ,the handler to be called once the SwfWidgetLoader framework was successfully loaded
 	 * @return, the SwfWidgetLoader widget to be added
 	 */
-	static Widget create(StartHandler handler) {
+	static Widget create(SwfLoadHandler handler) {
 		return SwfWidgetLoader.initAsWidget(PATH, BRIDGE_NAME, true, handler);
 	}
 
 	static Widget createWidget() {
-		return create(new StartHandler() {
+		return create(new SwfLoadHandler() {
 			@Override
-			public void onStart() {
+			public void onSwfLoad() {
 			}
 		});
 	}
