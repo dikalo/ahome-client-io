@@ -42,14 +42,37 @@ public class ClientIoEntryPoint implements EntryPoint {
 4) Below is an example how you could create a text file on the client.
 
 ```java
-public class ClientIoEntryPoint implements EntryPoint { 
-    @Override
-    public void onLoad() {
-        ClientIO.init();
+package com.ait.toolkit.clientio.demo.client;
 
-		
-    }
+import com.ait.toolkit.clientio.client.ClientIO;
+import com.google.gwt.core.client.EntryPoint;
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.user.client.ui.Button;
+import com.google.gwt.user.client.ui.RootPanel;
+
+public class HelloClientIO implements EntryPoint {
+
+	@Override
+	public void onModuleLoad() {
+
+		// initialize global client io
+		ClientIO.init();
+
+		Button button = new Button("Click Me");
+		button.addClickHandler(new ClickHandler() {
+			@Override
+			public void onClick(ClickEvent event) {
+
+				// create a simple text file
+				ClientIO.saveFile("Hello World", "file.txt");
+			}
+		});
+		RootPanel.get().add(button);
+	}
+
 }
+
 ```
 
 
