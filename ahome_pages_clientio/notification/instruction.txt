@@ -1,0 +1,39 @@
+
+   
+ To set a standard width, padding and text alignment on the notifications include this css on your page:
+.ux-notification-window .x-window-body {
+	text-align: center;
+	padding: 15px 5px 15px 5px;
+	width: 200px;
+}
+				
+If you wish to add icons to the windows title you can download the info and error icons and include this css on your page:
+.ux-notification-icon-information {
+	background-image: url('icon16_info.png');
+}
+
+.ux-notification-icon-error {
+	background-image: url('icon16_error.png');
+}
+				
+Then set the iconCls property to 'ux-notification-icon-information' or 'ux-notification-icon-error' to enable the icon on the notification.
+ 
+If you wish to style the notifications as in the Demo 2 below then download the fader.png and add the following css to your page:
+.ux-notification-light .x-window-header {
+	background-color: transparent;
+}
+
+body .ux-notification-light {
+	background-image: url('fader.png');
+}
+
+.ux-notification-light .x-window-body {
+	text-align: center;
+	padding: 15px 5px 18px 5px;
+	width: 200px;
+	background-color: transparent;
+	border: 0px solid white;
+}
+				
+Then set the cls property to 'ux-notification-light'. Note that this styling differs a bit between new browsers and >=IE8.
+ 
