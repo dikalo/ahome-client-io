@@ -4,9 +4,12 @@ Ahome-Client-IO
 Ahome-Client-IO is a GWT library the helps read and write file on the client(no server required).
 The library comes with a couple of nice feratures:
 
-* Read/Write files on the client.
+* Read/Write text files on the client.
+* Read/Write binary files on the client
 * Create PDF files on the client
 * Create Excel on the client.
+* Work with any GWT apllication
+* Creates GWT widgets to add into your application
 
 The following components are required to work with Client-IO:
 
