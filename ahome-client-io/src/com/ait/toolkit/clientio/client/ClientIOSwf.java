@@ -15,17 +15,30 @@
  */
 package com.ait.toolkit.clientio.client;
 
+import java.util.Arrays;
+import java.util.List;
+
 import com.ait.toolkit.flash.core.client.framework.Application;
 import com.ait.toolkit.flash.core.client.framework.Bridge;
+import com.ait.toolkit.flash.core.client.net.FileFilter;
 import com.ait.toolkit.flash.core.client.net.FileReference;
+import com.ait.toolkit.flash.core.client.utils.ByteArray;
 import com.google.gwt.core.client.JavaScriptObject;
+import com.google.gwt.core.client.JsArray;
 
-class ClientIOSwf extends Application {
+public class ClientIOSwf extends Application {
 
 	private static final ClientIOSwf INSTANCE = new ClientIOSwf();
+	private String bridgeName;
+	private final FileFilter DEFAULT_FILE_FILTER = new FileFilter("Choose a file", "*");
 
 	protected ClientIOSwf() {
-		jsObj = Bridge.get().getRoot();
+		this("Flash4j");
+	}
+
+	protected ClientIOSwf(String bridgeName) {
+		this.bridgeName = bridgeName;
+		jsObj = Bridge.get(bridgeName).getRoot();
 	}
 
 	ClientIOSwf(JavaScriptObject obj) {
@@ -39,6 +52,10 @@ class ClientIOSwf extends Application {
 	 */
 	public static ClientIOSwf get() {
 		return INSTANCE;
+	}
+
+	public static ClientIOSwf get(String bridgeName) {
+		return new ClientIOSwf(bridgeName);
 	}
 
 	public native void setBackgroundColor(String value)/*-{
@@ -56,12 +73,39 @@ class ClientIOSwf extends Application {
 		root.setTextFontSize(value);
 	}-*/;
 
-	public native void setSaveText(String value)/*-{
+	public native void setLabel(String value)/*-{
 		var root = this.@com.ait.toolkit.core.client.JsObject::getJsObj()();
 		root.setSaveText(value);
 	}-*/;
 
-	native FileReference getSaveFileReference()/*-{
+	private native void _saveFile(Object data, String fileName)/*-{
+		var root = this.@com.ait.toolkit.core.client.JsObject::getJsObj()();
+		root.saveFile(data, fileName);
+	}-*/;
+
+	public FileReference browse() {
+		return browse(DEFAULT_FILE_FILTER);
+	}
+
+	public FileReference browse(FileFilter... fileFilter) {
+		_setFilter(fromListOfFileFilter(Arrays.asList(fileFilter)));
+		return getBrowseFileReference();
+	}
+
+	public FileReference browse(List<FileFilter> fileFilter) {
+		_setFilter(fromListOfFileFilter(fileFilter));
+		return getBrowseFileReference();
+	}
+
+	public final void saveFile(ByteArray data, String fileName) {
+		_saveFile(data.getJsObj(), fileName);
+	}
+
+	public final void saveFile(String data, String fileName) {
+		_saveFile(data, fileName);
+	}
+
+	public native FileReference getSaveFileReference()/*-{
 		var root = this.@com.ait.toolkit.core.client.JsObject::getJsObj()();
 		var obj = root.getSaveFileReference();
 		if (obj == null) {
@@ -69,5 +113,31 @@ class ClientIOSwf extends Application {
 		}
 		return @com.ait.toolkit.flash.core.client.net.FileReference::new(Lcom/google/gwt/core/client/JavaScriptObject;)(obj);
 	}-*/;
+
+	public native FileReference getBrowseFileReference()/*-{
+		var root = this.@com.ait.toolkit.core.client.JsObject::getJsObj()();
+		var obj = root.getbrowseFileRef();
+		if (!obj) {
+			return null;
+		}
+		return @com.ait.toolkit.flash.core.client.net.FileReference::new(Lcom/google/gwt/core/client/JavaScriptObject;)(obj);
+	}-*/;
+
+	private native void _setFilter(JavaScriptObject value)/*-{
+		var root = this.@com.ait.toolkit.core.client.JsObject::getJsObj()();
+		for (var i = 0; i < value.length; i++) {
+			root.pushValues(value[i]);
+		}
+		root.prepareBrowse();
+	}-*/;
+
+	private JavaScriptObject fromListOfFileFilter(List<FileFilter> values) {
+		JsArray<JavaScriptObject> toReturn = JsArray.createArray().cast();
+		int size = values.size();
+		for (int i = 0; i < size; i++) {
+			toReturn.push(values.get(i).getJsObj());
+		}
+		return toReturn;
+	}
 
 }

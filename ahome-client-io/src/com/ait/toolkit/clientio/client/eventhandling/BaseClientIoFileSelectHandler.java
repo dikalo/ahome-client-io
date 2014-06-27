@@ -1,4 +1,4 @@
-package com.ait.toolkit.clientio.client;
+package com.ait.toolkit.clientio.client.eventhandling;
 
 /**
  * Base Client IO FileSelect handler. <br/>
@@ -15,7 +15,7 @@ public abstract class BaseClientIoFileSelectHandler implements ClientIoFileSelec
 	}
 
 	@Override
-	public void onIoError() {
+	public void onIoError(String errorMessage) {
 
 	}
 

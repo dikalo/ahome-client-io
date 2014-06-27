@@ -1,4 +1,4 @@
-package com.ait.toolkit.clientio.client;
+package com.ait.toolkit.clientio.client.eventhandling;
 
 import com.ait.toolkit.flash.core.client.utils.ByteArray;
 
@@ -18,7 +18,7 @@ public interface ClientIoFileSelectHandler {
 	 *            , the data contained in the file
 	 * 
 	 */
-	public void onFileLoaded(ByteArray data);
+	public void onFileLoaded(String fileName, String fileType, ByteArray data, double fileSize);
 
 	/**
 	 * Called when the file selection was canceled
@@ -28,6 +28,6 @@ public interface ClientIoFileSelectHandler {
 	/**
 	 * Called when an I/O error occurs
 	 */
-	public void onIoError();
+	public void onIoError(String errorMessage);
 
 }

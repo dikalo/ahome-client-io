@@ -1,4 +1,4 @@
-package com.ait.toolkit.clientio.client;
+package com.ait.toolkit.clientio.client.eventhandling;
 
 import com.google.gwt.user.client.Window;
 
@@ -17,7 +17,7 @@ public class DefaultClientIOInitHandler implements ClientIOInitHandler {
 
 	@Override
 	public void onInitError() {
-		Window.alert(ClientIO.FLASH_NOT_INSTALLED);
+		Window.alert("Flash seems to not be installed");
 	}
 
 }

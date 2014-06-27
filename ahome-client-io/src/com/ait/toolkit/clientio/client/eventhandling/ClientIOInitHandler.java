@@ -1,4 +1,4 @@
-package com.ait.toolkit.clientio.client;
+package com.ait.toolkit.clientio.client.eventhandling;
 
 /**
  * Base interface for handling Client IO initialization.

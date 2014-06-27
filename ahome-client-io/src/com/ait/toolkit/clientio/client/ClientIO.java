@@ -20,6 +20,10 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import com.ait.toolkit.clientio.client.eventhandling.ClientIOInitHandler;
+import com.ait.toolkit.clientio.client.eventhandling.ClientIoFileSaveHandler;
+import com.ait.toolkit.clientio.client.eventhandling.ClientIoFileSelectHandler;
+import com.ait.toolkit.clientio.client.eventhandling.DefaultClientIOInitHandler;
 import com.ait.toolkit.flash.core.client.events.CallbackRegistration;
 import com.ait.toolkit.flash.core.client.events.Event;
 import com.ait.toolkit.flash.core.client.events.IOErrorEvent;
@@ -30,7 +34,7 @@ import com.ait.toolkit.flash.core.client.toplevel.Flash;
 import com.ait.toolkit.flash.core.client.utils.ByteArray;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.core.client.JsArray;
-import com.google.gwt.event.shared.GwtEvent;
+import com.google.gwt.user.client.ui.Widget;
 
 /**
  * Main I/O class. Export some Flash File API to GWT.
@@ -68,13 +72,16 @@ public class ClientIO {
 		init(defaultInitHandler);
 	}
 
+	public static Widget createIoWidget(final ClientIoWidgetCreateHandler clickHandler) {
+		return ClientIOWidget.createIoWidget(clickHandler);
+	}
+
 	public static final void saveFile(ByteArray data, String fileName, String message) {
 		if (wasInitiated) {
 			ClientIO.setLabel(message);
 			_saveFile(data.getJsObj(), fileName);
 			ClientIOInfoBox.display();
 		}
-
 	}
 
 	public static final void saveFile(ByteArray data, String fileName, String message, int closeDelay) {
@@ -143,6 +150,15 @@ public class ClientIO {
 			ClientIO.setLabel(message);
 			_saveFile(data, fileName);
 			ClientIOInfoBox.display(closeDelay, top, left);
+		}
+
+	}
+
+	public static final void saveFile(String data) {
+		if (wasInitiated) {
+			ClientIO.setLabel(MESSAGE);
+			_saveFile(data, "fileName");
+			ClientIOInfoBox.display();
 		}
 
 	}
@@ -289,7 +305,7 @@ public class ClientIO {
 
 	public static void setLabel(String value) {
 		if (wasInitiated) {
-			ClientIOSwf.get().setSaveText(value);
+			ClientIOSwf.get().setLabel(value);
 		}
 	}
 
@@ -305,11 +321,7 @@ public class ClientIO {
 		}
 	}
 
-	public static void fireEvent(GwtEvent<?> event) {
-		ClientIOBus.fireEvent(event);
-	}
-
-	public static void addCallbackRegistration(CallbackRegistration cb) {
+	static void addCallbackRegistration(CallbackRegistration cb) {
 		ioCallbackRegistrations.add(cb);
 	}
 
@@ -318,6 +330,33 @@ public class ClientIO {
 			cb.removeHandler();
 		}
 		ioCallbackRegistrations.clear();
+	}
+
+	public static void addFileSaveHandler(final ClientIoFileSaveHandler handler) {
+		final FileReference fr = getSaveFileReference();
+		if (fr != null) {
+			clearCallbackRegistration();
+			addCallbackRegistration(fr.addEventHandler(Event.COMPLETE, new EventHandler() {
+				@Override
+				public void onEvent(Event event) {
+					handler.onFileSave(fr.getName(), fr.getType(), fr.getSize());
+				}
+			}));
+			addCallbackRegistration(fr.addEventHandler(IOErrorEvent.IO_ERROR, new EventHandler() {
+				@Override
+				public void onEvent(Event event) {
+					IOErrorEvent e = IOErrorEvent.cast(event);
+					handler.onIoError(e.getText());
+				}
+			}));
+			addCallbackRegistration(fr.addEventHandler(Event.CANCEL, new EventHandler() {
+				@Override
+				public void onEvent(Event event) {
+					handler.onCancel();
+				}
+			}));
+
+		}
 	}
 
 	public static void addFileSelectHandler(final ClientIoFileSelectHandler handler) {
@@ -331,14 +370,14 @@ public class ClientIO {
 					addCallbackRegistration(fr.addEventHandler(Event.COMPLETE, new EventHandler() {
 						@Override
 						public void onEvent(Event event) {
-							ByteArray data = fr.getData();
-							handler.onFileLoaded(data);
+							handler.onFileLoaded(fr.getName(), fr.getType(), fr.getData(), fr.getSize());
 						}
 					}));
 					addCallbackRegistration(fr.addEventHandler(IOErrorEvent.IO_ERROR, new EventHandler() {
 						@Override
 						public void onEvent(Event event) {
-							handler.onIoError();
+							IOErrorEvent e = IOErrorEvent.cast(event);
+							handler.onIoError(e.getText());
 						}
 					}));
 
@@ -372,6 +411,15 @@ public class ClientIO {
 	private static native FileReference getFileReference()/*-{
 		var root = $wnd.FABridge["Flash4j"].root();
 		var obj = root.getbrowseFileRef();
+		if (!obj) {
+			return null;
+		}
+		return @com.ait.toolkit.flash.core.client.net.FileReference::new(Lcom/google/gwt/core/client/JavaScriptObject;)(obj);
+	}-*/;
+
+	private static native FileReference getSaveFileReference()/*-{
+		var root = $wnd.FABridge["Flash4j"].root();
+		var obj = root.getSaveFileReference();
 		if (!obj) {
 			return null;
 		}

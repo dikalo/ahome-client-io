@@ -13,7 +13,7 @@
  See the License for the specific language governing permissions and
  limitations under the License.
  */
-package com.ait.toolkit.clientio.client;
+package com.ait.toolkit.clientio.client.eventhandling;
 
 import com.google.gwt.event.shared.EventHandler;
 

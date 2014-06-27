@@ -16,19 +16,45 @@
 package com.ait.toolkit.clientio.client;
 
 import com.ait.toolkit.core.client.Util;
+import com.ait.toolkit.flash.core.client.framework.Bridge;
 import com.ait.toolkit.flash.widget.client.SwfLoadHandler;
 import com.ait.toolkit.flash.widget.client.loader.SwfWidgetLoader;
 import com.google.gwt.user.client.ui.Widget;
 
 /**
- * The ClientIOWidget class is responsible of bootstrapping the client side file access api
+ * The ClientIOWidget class is responsible of creating the GWT based SWF Widget.
  */
 class ClientIOWidget {
 
 	private static final String PATH = Util.getModuleBaseUrl() + "clientio/ClientIO.swf";
-	private static final String BRIDGE_NAME = "Flash4j";
+	private static final String WIDGET_PATH = Util.getModuleBaseUrl() + "clientio/ClientIOWidget.swf";
+	private static final String DEFAULT_BRIDGE_NAME = "Flash4j";
 
 	private ClientIOWidget() {
+	}
+
+	static Widget createIoWidget(final ClientIoWidgetCreateHandler clickHandler) {
+		String bridgeName = Util.randomString();
+		Bridge.setBridgeName(bridgeName);
+		final ClientIoElement fileApi = new ClientIoElement(bridgeName);
+		return ClientIOWidget.create(WIDGET_PATH, bridgeName, false, new SwfLoadHandler() {
+			@Override
+			public void onSwfLoad() {
+				clickHandler.onWidgetCreated(fileApi);
+			}
+		});
+	}
+
+	static Widget createIoWidget(int width, int height, final ClientIoWidgetCreateHandler clickHandler) {
+		String bridgeName = Util.randomString();
+		Bridge.setBridgeName(bridgeName);
+		final ClientIoElement fileApi = new ClientIoElement(bridgeName);
+		return ClientIOWidget.create(width, height, WIDGET_PATH, bridgeName, false, new SwfLoadHandler() {
+			@Override
+			public void onSwfLoad() {
+				clickHandler.onWidgetCreated(fileApi);
+			}
+		});
 	}
 
 	/**
@@ -43,7 +69,15 @@ class ClientIOWidget {
 	 * @return, the widget to be added
 	 */
 	static Widget create(int width, int height, SwfLoadHandler handler) {
-		return SwfWidgetLoader.initAsWidget(PATH, width, height, BRIDGE_NAME, true, handler);
+		return SwfWidgetLoader.initAsWidget(PATH, width, height, DEFAULT_BRIDGE_NAME, true, handler);
+	}
+
+	static Widget create(int width, int height, String path, String bridgeName, boolean transparent, SwfLoadHandler handler) {
+		return SwfWidgetLoader.initAsWidget(PATH, width, height, bridgeName, transparent, handler);
+	}
+
+	static Widget create(String path, String bridgeName, boolean transparent, SwfLoadHandler handler) {
+		return SwfWidgetLoader.initAsWidget(path, bridgeName, transparent, handler);
 	}
 
 	/**
@@ -54,7 +88,7 @@ class ClientIOWidget {
 	 * @return, the SwfWidgetLoader widget to be added
 	 */
 	static Widget create(SwfLoadHandler handler) {
-		return SwfWidgetLoader.initAsWidget(PATH, BRIDGE_NAME, true, handler);
+		return SwfWidgetLoader.initAsWidget(PATH, DEFAULT_BRIDGE_NAME, true, handler);
 	}
 
 	static Widget createWidget() {
