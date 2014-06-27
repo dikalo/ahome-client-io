@@ -24,7 +24,7 @@ The following components are required to work with Client-IO:
 ```xml
   <inherits name="com.ait.toolkit.clientio.ClientIO"/>
 ```
-3) Make sure to  initialize Client-IO right in the begnning of your entry point.
+3) Initialize Client-IO as the first statement in your entry point.
 
 ```java
 public class ClientIoEntryPoint implements EntryPoint { 
@@ -32,6 +32,18 @@ public class ClientIoEntryPoint implements EntryPoint {
     public void onLoad() {
         ClientIO.init();
 	//rest of the apg goes here
+		
+    }
+}
+```
+4) Below is an example how you could create a text file on the client.
+
+```java
+public class ClientIoEntryPoint implements EntryPoint { 
+    @Override
+    public void onLoad() {
+        ClientIO.init();
+
 		
     }
 }
