@@ -7,7 +7,6 @@ The following components are required to work with Client-IO:
 
 * GWT 2.5 and higher
 * Adobe Flash player 11+
-* 
 
 
 ##Getting started with Client-IO
