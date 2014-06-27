@@ -15,7 +15,7 @@ Get high quality support through Ahomé (Note that Ahomé-Ext is FREE to use wit
 
 
 ##Demos
-* [Ahomé-Client-IO](http://ahome-it.github.io/ahome-ext/)
+* [Ahomé-Client-IO](http://ahome-it.github.io/ahome-client-io/)
 
 
 
