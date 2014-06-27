@@ -76,6 +76,45 @@ public class HelloClientIO implements EntryPoint {
 }
 
 ```
+5) Creating a PDF file on the client is also very simple
+```java
+package com.ait.toolkit.clientio.demo.client;
+
+import com.ait.toolkit.clientio.client.ClientIO;
+import com.google.gwt.core.client.EntryPoint;
+import com.ait.toolkit.flash.alivepdf.client.pdf.PDF;
+import com.ait.toolkit.flash.core.client.utils.ByteArray;
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.user.client.ui.Button;
+import com.google.gwt.user.client.ui.RootPanel;
+
+public class HelloClientIO implements EntryPoint {
+
+	@Override
+	public void onModuleLoad() {
+
+		// initialize global client io
+		ClientIO.init();
+
+		Button button = new Button("Click Me");
+		button.addClickHandler(new ClickHandler() {
+			@Override
+			public void onClick(ClickEvent event) {
+                           PDF pdf = new PDF();
+		           pdf.addPage();
+
+			   pdf.addText("Hello World");
+			   ByteArray pdfContent = pdf.save();
+			   ClientIO.saveFile(pdfContent, "new.pdf");
+			}
+		});
+		RootPanel.get().add(button);
+	}
+
+}
+
+```
 
 
 
