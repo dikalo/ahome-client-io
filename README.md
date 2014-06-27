@@ -10,6 +10,8 @@ The library comes with a couple of nice feratures:
 * Create Excel on the client.
 * Work with any GWT apllication
 * Creates GWT widgets to add into your application
+* And more ...
+
 
 The following components are required to work with Client-IO:
 
