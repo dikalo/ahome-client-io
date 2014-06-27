@@ -36,7 +36,7 @@ https://github.com/ahome-it/ahome-client-io/issues
 
 
 ##Enterprise Support
-Get high quality support through Ahomé (Note that Ahomé-Ext is FREE to use with an Apache 2 License).
+Get high quality support through Ahomé
 * <a href="http://opensource.ahome-it.com/pricing/">Buy Enterprise Support</a>
 
 ##Community
