@@ -36,7 +36,7 @@ public class ClientIoEntryPoint implements EntryPoint {
     @Override
     public void onLoad() {
         ClientIO.init();
-	//rest of the apg goes here
+	//rest of the app goes here
 		
     }
 }
