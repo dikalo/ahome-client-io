@@ -22,17 +22,13 @@ The following components are required to work with Client-IO:
 3) Make sure to  initialize Client-IO right in the begnning of your entry point.
 
 ```java
-  public class ClientIoEntryPoint implements EntryPoint {
-
-
-	@Override
-	public void onLoad() {
-
-		ClientIO.init();
+public class ClientIoEntryPoint implements EntryPoint { 
+    @Override
+    public void onLoad() {
+        ClientIO.init();
+	//rest of the apg goes here
 		
-		//rest of the ap here
-		
-	}
+    }
 }
 ```
 
