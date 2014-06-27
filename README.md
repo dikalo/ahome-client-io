@@ -101,7 +101,7 @@ public class HelloClientIO implements EntryPoint {
 		button.addClickHandler(new ClickHandler() {
 			@Override
 			public void onClick(ClickEvent event) {
-                           PDF pdf = new PDF();
+                         PDF pdf = new PDF();
 		           pdf.addPage();
 
 			   pdf.addText("Hello World");
