@@ -14,11 +14,26 @@ The following components are required to work with Client-IO:
 * <a href="http://opensource.ahome-it.com/#ahome-client-io">Client IO  jar</a>
 
 
-
 2) Inherit the Client-IO module
 
 ```xml
   <inherits name="com.ait.toolkit.clientio.ClientIO"/>
+```
+3) Make sure to  initialize Client-IO right in the begnning of your entry point.
+
+```java
+  public class ClientIoEntryPoint implements EntryPoint {
+
+
+	@Override
+	public void onLoad() {
+
+		ClientIO.init();
+		
+		//rest of the ap here
+		
+	}
+}
 ```
 
 
