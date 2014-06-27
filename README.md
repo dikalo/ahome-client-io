@@ -116,28 +116,22 @@ public class HelloClientIO implements EntryPoint {
 
 ```
 
+##Real world Demo
+* [Ahomé-Client-IO](http://ahome-it.github.io/ahome-client-io/)
 
+##Issues tracking
+* [Ahomé-Client-IO Issues tracker](https://github.com/ahome-it/ahome-client-io/issues)
 
-Documentation
-
-Coming soon...
-
-Issue Tracking
-
-https://github.com/ahome-it/ahome-client-io/issues
-
-
+##Community
+* [Ahomé Google+ Community](https://plus.google.com/u/0/communities/106380618381566688303) - See whats happening in the community.
 
 
 ##Enterprise Support
 Get high quality support through Ahomé
 * <a href="http://opensource.ahome-it.com/pricing/">Buy Enterprise Support</a>
 
-##Community
-* [Ahomé Google+ Community](https://plus.google.com/u/0/communities/106380618381566688303) - See whats happening in the community.
 
-##Demos
-* [Ahomé-Client-IO](http://ahome-it.github.io/ahome-client-io/)
+
 
 
 
