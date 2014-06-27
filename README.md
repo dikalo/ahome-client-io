@@ -1,4 +1,4 @@
-Ahome-Client-Io
+Ahome-Client-IO
 ======
 
 Ahome-Client-IO is a GWT library the helps read and write file on the client(no server required).
