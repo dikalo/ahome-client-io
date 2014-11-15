@@ -28,6 +28,7 @@ import com.ait.toolkit.flash.core.client.events.CallbackRegistration;
 import com.ait.toolkit.flash.core.client.events.Event;
 import com.ait.toolkit.flash.core.client.events.IOErrorEvent;
 import com.ait.toolkit.flash.core.client.events.handlers.EventHandler;
+import com.ait.toolkit.flash.core.client.framework.FlashCore;
 import com.ait.toolkit.flash.core.client.net.FileFilter;
 import com.ait.toolkit.flash.core.client.net.FileReference;
 import com.ait.toolkit.flash.core.client.toplevel.Flash;
@@ -62,6 +63,7 @@ public class ClientIO {
 			return;
 		}
 		if (!wasInitiated) {
+			FlashCore.injectResources();
 			ClientIOInfoBox.get();
 			initHandler.onInit();
 			wasInitiated = true;

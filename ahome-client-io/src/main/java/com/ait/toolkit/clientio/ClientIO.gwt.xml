@@ -4,5 +4,4 @@
   <inherits name='com.ait.toolkit.flash.alivepdf.AlivePDF'/>
   <!--  inherits name='com.ait.toolkit.flash.purepdf.PurePDF'/-->
   <inherits name='com.ait.toolkit.flash.excel.Excel'/>
-  <script src="clientio/ClientIO.swf"/> 
 </module>
