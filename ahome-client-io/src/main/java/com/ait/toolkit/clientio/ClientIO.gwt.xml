@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module>
+  <inherits name='com.ait.toolkit.flash.core.Core'/>
+  <inherits name='com.ait.toolkit.flash.alivepdf.AlivePDF'/>
+  <!--  inherits name='com.ait.toolkit.flash.purepdf.PurePDF'/-->
+  <inherits name='com.ait.toolkit.flash.excel.Excel'/>
+</module>
