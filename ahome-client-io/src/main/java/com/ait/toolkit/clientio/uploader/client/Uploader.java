@@ -267,8 +267,8 @@ public class Uploader extends AbsolutePanel {
     }
 
     private static native void nativeSetUploadURL( JavaScriptObject swfUpload, String url ) /*-{
-                                                                                            swfUpload.setUploadURL(url);
-                                                                                            }-*/;
+		swfUpload.setUploadURL(url);
+    }-*/;
 
     private String ajaxUploadURL;
 
@@ -334,8 +334,8 @@ public class Uploader extends AbsolutePanel {
     }
 
     private static native void nativeSetFilePostName( JavaScriptObject swfUpload, String filePostName ) /*-{
-                                                                                                        swfUpload.setFilePostName(filePostName);
-                                                                                                        }-*/;
+		swfUpload.setFilePostName(filePostName);
+    }-*/;
 
     private JSONObject postParams = null;
 
@@ -371,8 +371,8 @@ public class Uploader extends AbsolutePanel {
     }
 
     private static native void nativeSetPostParams( JavaScriptObject swfUpload, JavaScriptObject postParams ) /*-{
-                                                                                                              swfUpload.setPostParams(postParams);
-                                                                                                              }-*/;
+		swfUpload.setPostParams(postParams);
+    }-*/;
 
     /**
      * Convenience method for setting the 'use_query_string' option of the component, either before or
@@ -398,8 +398,8 @@ public class Uploader extends AbsolutePanel {
     }
 
     private static native void nativeSetUseQueryString( JavaScriptObject swfUpload, boolean useQueryString ) /*-{
-                                                                                                             swfUpload.setUseQueryString(useQueryString);
-                                                                                                             }-*/;
+		swfUpload.setUseQueryString(useQueryString);
+    }-*/;
 
     /**
      * Convenience method for setting the 'preserve_relative_urls' option of the component.  Equivalent to:
@@ -536,8 +536,8 @@ public class Uploader extends AbsolutePanel {
     }
 
     private static native void nativeSetFileTypes( JavaScriptObject swfUpload, String fileTypes, String fileTypesDescription ) /*-{
-                                                                                                                               swfUpload.setFileTypes(fileTypes, fileTypesDescription);
-                                                                                                                               }-*/;
+		swfUpload.setFileTypes(fileTypes, fileTypesDescription);
+    }-*/;
 
     private long fileSizeLimit = 0;
 
@@ -598,8 +598,8 @@ public class Uploader extends AbsolutePanel {
     }
 
     private static native void nativeSetFileSizeLimit( JavaScriptObject swfUpload, String fileSizeLimit ) /*-{
-                                                                                                          swfUpload.setFileSizeLimit(fileSizeLimit);
-                                                                                                          }-*/;
+		swfUpload.setFileSizeLimit(fileSizeLimit);
+    }-*/;
 
     private long fileUploadLimit = 0;
     private long totalFilesUploaded = 0;
@@ -631,8 +631,8 @@ public class Uploader extends AbsolutePanel {
     }
 
     private static native void nativeSetFileUploadLimit( JavaScriptObject swfUpload, double fileUploadLimit ) /*-{
-                                                                                                              swfUpload.setFileUploadLimit(fileUploadLimit);
-                                                                                                              }-*/;
+		swfUpload.setFileUploadLimit(fileUploadLimit);
+    }-*/;
 
     private long fileQueueLimit = Long.MAX_VALUE;
 
@@ -659,8 +659,8 @@ public class Uploader extends AbsolutePanel {
     }
 
     private static native void nativeSetFileQueueLimit( JavaScriptObject swfUpload, double fileQueueLimit ) /*-{
-                                                                                                            swfUpload.setFileQueueLimit(fileQueueLimit);
-                                                                                                            }-*/;
+		swfUpload.setFileQueueLimit(fileQueueLimit);
+    }-*/;
 
     private String flashURL;
 
@@ -751,8 +751,8 @@ public class Uploader extends AbsolutePanel {
     }
 
     private static native void nativeSetButtonImageURL( JavaScriptObject swfUpload, String buttonImageURL ) /*-{
-                                                                                                            swfUpload.setButtonImageURL(buttonImageURL);
-                                                                                                            }-*/;
+		swfUpload.setButtonImageURL(buttonImageURL);
+    }-*/;
 
     private int buttonWidth = -1;
 
@@ -805,8 +805,8 @@ public class Uploader extends AbsolutePanel {
     }
 
     private static native void nativeSetButtonDimensions( JavaScriptObject swfUpload, int buttonWidth, int buttonHeight ) /*-{
-                                                                                                                          swfUpload.setButtonDimensions(buttonWidth, buttonHeight);
-                                                                                                                          }-*/;
+		swfUpload.setButtonDimensions(buttonWidth, buttonHeight);
+    }-*/;
 
     private String buttonText;
     private DivElement buttonTextElement;
@@ -839,8 +839,8 @@ public class Uploader extends AbsolutePanel {
     }
 
     private static native void nativeSetButtonText( JavaScriptObject swfUpload, String buttonText ) /*-{
-                                                                                                    swfUpload.setButtonText(buttonText);
-                                                                                                    }-*/;
+		swfUpload.setButtonText(buttonText);
+    }-*/;
 
     private String buttonTextStyle;
     private StyleElement buttonTextStyleElement;
@@ -871,8 +871,8 @@ public class Uploader extends AbsolutePanel {
     }
 
     private static native void nativeSetButtonTextStyle( JavaScriptObject swfUpload, String buttonTextStyle ) /*-{
-                                                                                                              swfUpload.setButtonTextStyle(buttonTextStyle);
-                                                                                                              }-*/;
+		swfUpload.setButtonTextStyle(buttonTextStyle);
+    }-*/;
 
     private int buttonTextTopPadding = Integer.MIN_VALUE;
 
@@ -919,8 +919,9 @@ public class Uploader extends AbsolutePanel {
     }
 
     private static native void nativeSetButtonTextPadding( JavaScriptObject swfUpload, int buttonTextLeftPadding, int buttonTextTopPadding ) /*-{
-                                                                                                                                             swfUpload.setButtonTextPadding(buttonTextLeftPadding, buttonTextTopPadding);
-                                                                                                                                             }-*/;
+		swfUpload.setButtonTextPadding(buttonTextLeftPadding,
+				buttonTextTopPadding);
+    }-*/;
 
     private ButtonAction buttonAction = ButtonAction.SELECT_FILES;
 
@@ -944,8 +945,8 @@ public class Uploader extends AbsolutePanel {
     }
 
     private static native void nativeSetButtonAction( JavaScriptObject swfUpload, int buttonAction ) /*-{
-                                                                                                     swfUpload.setButtonAction(buttonAction);
-                                                                                                     }-*/;
+		swfUpload.setButtonAction(buttonAction);
+    }-*/;
 
     private boolean buttonDisabled = false;
 
@@ -988,8 +989,8 @@ public class Uploader extends AbsolutePanel {
     }
 
     private static native void nativeSetButtonDisabled( JavaScriptObject swfUpload, boolean buttonDisabled ) /*-{
-                                                                                                             swfUpload.setButtonDisabled(buttonDisabled);
-                                                                                                             }-*/;
+		swfUpload.setButtonDisabled(buttonDisabled);
+    }-*/;
 
     private Cursor buttonCursor;
 
@@ -1013,8 +1014,8 @@ public class Uploader extends AbsolutePanel {
     }
 
     private static native void nativeSetButtonCursor( JavaScriptObject swfUpload, int buttonCursor ) /*-{
-                                                                                                     swfUpload.setButtonCursor(buttonCursor);
-                                                                                                     }-*/;
+		swfUpload.setButtonCursor(buttonCursor);
+    }-*/;
 
     /**
      * Convenience method for setting the 'button_window_mode' option of the component.  Equivalent to:
@@ -1088,8 +1089,8 @@ public class Uploader extends AbsolutePanel {
     }
 
     private static native Stats nativeGetStats( JavaScriptObject swfUpload ) /*-{
-                                                                             return swfUpload.getStats();
-                                                                             }-*/;
+		return swfUpload.getStats();
+    }-*/;
 
     private SWFUploadLoadedHandler swfUploadLoadedHandler;
 
@@ -1322,8 +1323,8 @@ public class Uploader extends AbsolutePanel {
     }
 
     private static native void nativeStartSWFUpload( JavaScriptObject swfUpload ) /*-{
-                                                                                  swfUpload.startUpload();
-                                                                                  }-*/;
+		swfUpload.startUpload();
+    }-*/;
 
     // See: https://developer.mozilla.org/en/Using_files_from_web_applications
     private native JavaScriptObject nativeStartAjaxUpload( JavaScriptObject file, String url, String filePostName,
@@ -1334,10 +1335,10 @@ public class Uploader extends AbsolutePanel {
 
                                           // Setup the event handlers we'll need to let the consuming application know what's going on
                                           xhr.upload.addEventListener('progress', function(e) {
-                                          return self.@com.ait.toolkit.clientio.uploader.client.Uploader::uploadProgressEventCallback(Lorg/moxieapps/gwt/uploader/client/File;DD)(file, e.loaded, e.total);
+                                          return self.@com.ait.toolkit.clientio.uploader.client.Uploader::uploadProgressEventCallback(Lcom/ait/toolkit/clientio/uploader/client/File;DD)(file, e.loaded, e.total);
                                           }, false);
                                           xhr.addEventListener('load', function() {
-                                          return self.@com.ait.toolkit.clientio.uploader.client.Uploader::uploadSuccessEventCallback(Lorg/moxieapps/gwt/uploader/client/File;Ljava/lang/String;Ljava/lang/String;)(
+                                          return self.@com.ait.toolkit.clientio.uploader.client.Uploader::uploadSuccessEventCallback(Lcom/ait/toolkit/clientio/uploader/client/File;Ljava/lang/String;Ljava/lang/String;)(
                                           @com.ait.toolkit.clientio.uploader.client.Uploader::nativeUpdateFileProperties(Lcom/google/gwt/core/client/JavaScriptObject;I)(
                                           file,
                                           -4      // File.Status.COMPLETE
@@ -1347,7 +1348,7 @@ public class Uploader extends AbsolutePanel {
                                           )
                                           }, false);
                                           xhr.addEventListener('error', function() {
-                                          return self.@com.ait.toolkit.clientio.uploader.client.Uploader::uploadErrorEventCallback(Lorg/moxieapps/gwt/uploader/client/File;ILjava/lang/String;)(
+                                          return self.@com.ait.toolkit.clientio.uploader.client.Uploader::uploadErrorEventCallback(Lcom/ait/toolkit/clientio/uploader/client/File;ILjava/lang/String;)(
                                           @com.ait.toolkit.clientio.uploader.client.Uploader::nativeUpdateFileProperties(Lcom/google/gwt/core/client/JavaScriptObject;I)(
                                           file,
                                           -3      // File.Status.ERROR
@@ -1357,7 +1358,7 @@ public class Uploader extends AbsolutePanel {
                                           )
                                           }, false);
                                           xhr.addEventListener('abort', function() {
-                                          return self.@com.ait.toolkit.clientio.uploader.client.Uploader::uploadErrorEventCallback(Lorg/moxieapps/gwt/uploader/client/File;ILjava/lang/String;)(
+                                          return self.@com.ait.toolkit.clientio.uploader.client.Uploader::uploadErrorEventCallback(Lcom/ait/toolkit/clientio/uploader/client/File;ILjava/lang/String;)(
                                           @com.ait.toolkit.clientio.uploader.client.Uploader::nativeUpdateFileProperties(Lcom/google/gwt/core/client/JavaScriptObject;I)(
                                           file,
                                           -5      // File.Status.CANCELLED
@@ -1399,8 +1400,8 @@ public class Uploader extends AbsolutePanel {
     }
 
     private static native void nativeStartUpload( JavaScriptObject swfUpload, String fileId ) /*-{
-                                                                                              swfUpload.startUpload(fileId);
-                                                                                              }-*/;
+		swfUpload.startUpload(fileId);
+    }-*/;
 
     /**
      * Cancel the file upload for a specific file and remove from the queue.
@@ -1461,12 +1462,12 @@ public class Uploader extends AbsolutePanel {
     }
 
     private static native void nativeAbortXMLHttpRequest( JavaScriptObject xmlHttpRequest ) /*-{
-                                                                                            xmlHttpRequest.abort();
-                                                                                            }-*/;
+		xmlHttpRequest.abort();
+    }-*/;
 
     private static native void nativeCancelUpload( JavaScriptObject swfUpload, String fileId, boolean triggerErrorEvent ) /*-{
-                                                                                                                          swfUpload.cancelUpload(fileId, triggerErrorEvent);
-                                                                                                                          }-*/;
+		swfUpload.cancelUpload(fileId, triggerErrorEvent);
+    }-*/;
 
     /**
      * Cancel the first file in the queue.
@@ -1482,8 +1483,8 @@ public class Uploader extends AbsolutePanel {
     }
 
     private static native void nativeCancelUpload( JavaScriptObject swfUpload ) /*-{
-                                                                                swfUpload.cancelUpload();
-                                                                                }-*/;
+		swfUpload.cancelUpload();
+    }-*/;
 
     /**
      * Cancel the the file with the supplied id. An uploadError event will be
@@ -1500,8 +1501,8 @@ public class Uploader extends AbsolutePanel {
     }
 
     private static native void nativeCancelUpload( JavaScriptObject swfUpload, String fileId ) /*-{
-                                                                                               swfUpload.cancelUpload(fileId);
-                                                                                               }-*/;
+		swfUpload.cancelUpload(fileId);
+    }-*/;
 
     /**
      * Cancel the first file in the queue.
@@ -1519,8 +1520,8 @@ public class Uploader extends AbsolutePanel {
     }
 
     private static native void nativeCancelUpload( JavaScriptObject swfUpload, boolean triggerErrorEvent ) /*-{
-                                                                                                           swfUpload.cancelUpload(null, triggerErrorEvent);
-                                                                                                           }-*/;
+		swfUpload.cancelUpload(null, triggerErrorEvent);
+    }-*/;
 
     /**
      * Stop and re-queues the file currently being uploaded.  Note: this method
@@ -1539,8 +1540,8 @@ public class Uploader extends AbsolutePanel {
     }
 
     private static native void nativeStopUpload( JavaScriptObject swfUpload, String fileId, boolean triggerErrorEvent ) /*-{
-                                                                                                                        swfUpload.stopUpload(fileId, triggerErrorEvent);
-                                                                                                                        }-*/;
+		swfUpload.stopUpload(fileId, triggerErrorEvent);
+    }-*/;
 
     private JavaScriptObject swfUpload;
 
@@ -1558,19 +1559,19 @@ public class Uploader extends AbsolutePanel {
     }
 
     private static native boolean isFileAPISupported() /*-{
-                                                       var inputElement = document.createElement('INPUT');
-                                                       inputElement.type = 'file';
-                                                       return 'files' in inputElement;
-                                                       }-*/;
+		var inputElement = document.createElement('INPUT');
+		inputElement.type = 'file';
+		return 'files' in inputElement;
+    }-*/;
 
     private static native boolean isAjaxUploadProgressEventsSupported() /*-{
-                                                                        var xhr = new XMLHttpRequest();
-                                                                        return !! (xhr && ('upload' in xhr) && ('onprogress' in xhr.upload));
-                                                                        }-*/;
+		var xhr = new XMLHttpRequest();
+		return !!(xhr && ('upload' in xhr) && ('onprogress' in xhr.upload));
+    }-*/;
 
     private static native boolean isFormDataSupported() /*-{
-                                                        return !! window.FormData;
-                                                        }-*/;
+		return !!window.FormData;
+    }-*/;
 
     // Purposefully using concrete types here instead of a generic list to increase GWT performance
     private ArrayList<JavaScriptObject> nativeFilesQueued = new ArrayList<JavaScriptObject>();
@@ -1897,8 +1898,8 @@ public class Uploader extends AbsolutePanel {
      *         {@link #addFileToQueue(com.google.gwt.core.client.JavaScriptObject)} method.
      */
     public static native JsArray getDroppedFiles( NativeEvent event ) /*-{
-                                                                      return event.target.files || event.dataTransfer.files;
-                                                                      }-*/;
+		return event.target.files || event.dataTransfer.files;
+    }-*/;
 
     private void addFileToQueue( JavaScriptObject nativeFile ) {
         // Track each of the files that still need to be uploaded
@@ -1969,62 +1970,67 @@ public class Uploader extends AbsolutePanel {
 
     private native JavaScriptObject nativeCreateSWFUpload( JavaScriptObject options, JavaScriptObject eventHandlers ) /*-{
 
-                                                                                                                      var self = this;
+		var self = this;
 
-                                                                                                                      // Add in GWT interceptor callback functions for the various event handlers
-                                                                                                                      if (eventHandlers['swfupload_loaded_handler']) {
-                                                                                                                      options.swfupload_loaded_handler = function() {
-                                                                                                                      return self.@com.ait.toolkit.clientio.uploader.client.Uploader::swfUploadLoadedEventCallback()();
-                                                                                                                      };
-                                                                                                                      }
-                                                                                                                      if (eventHandlers['file_dialog_start_handler']) {
-                                                                                                                      options.file_dialog_start_handler = function() {
-                                                                                                                      return self.@com.ait.toolkit.clientio.uploader.client.Uploader::fileDialogStartEventCallback()();
-                                                                                                                      };
-                                                                                                                      }
-                                                                                                                      if (eventHandlers['file_queued_handler']) {
-                                                                                                                      options.file_queued_handler = function(file) {
-                                                                                                                      return self.@com.ait.toolkit.clientio.uploader.client.Uploader::fileQueuedEventCallback(Lorg/moxieapps/gwt/uploader/client/File;)(file);
-                                                                                                                      };
-                                                                                                                      }
-                                                                                                                      if (eventHandlers['file_queue_error_handler']) {
-                                                                                                                      options.file_queue_error_handler = function(file, errorCode, message) {
-                                                                                                                      return self.@com.ait.toolkit.clientio.uploader.client.Uploader::fileQueueErrorEventCallback(Lorg/moxieapps/gwt/uploader/client/File;ILjava/lang/String;)(file, errorCode, message);
-                                                                                                                      };
-                                                                                                                      }
-                                                                                                                      if (eventHandlers['file_dialog_complete_handler']) {
-                                                                                                                      options.file_dialog_complete_handler = function(numberOfFilesSelected, numberOfFilesQueued, totalFilesInQueue) {
-                                                                                                                      return self.@com.ait.toolkit.clientio.uploader.client.Uploader::fileDialogCompleteEventCallback(III)(numberOfFilesSelected, numberOfFilesQueued, totalFilesInQueue);
-                                                                                                                      };
-                                                                                                                      }
-                                                                                                                      if (eventHandlers['upload_start_handler']) {
-                                                                                                                      options.upload_start_handler = function(file) {
-                                                                                                                      return self.@com.ait.toolkit.clientio.uploader.client.Uploader::uploadStartEventCallback(Lorg/moxieapps/gwt/uploader/client/File;)(file);
-                                                                                                                      };
-                                                                                                                      }
-                                                                                                                      if (eventHandlers['upload_progress_handler']) {
-                                                                                                                      options.upload_progress_handler = function(file, bytesComplete, bytesTotal) {
-                                                                                                                      return self.@com.ait.toolkit.clientio.uploader.client.Uploader::uploadProgressEventCallback(Lorg/moxieapps/gwt/uploader/client/File;DD)(file, bytesComplete, bytesTotal);
-                                                                                                                      };
-                                                                                                                      }
-                                                                                                                      if (eventHandlers['upload_error_handler']) {
-                                                                                                                      options.upload_error_handler = function(file, errorCode, message) {
-                                                                                                                      return self.@com.ait.toolkit.clientio.uploader.client.Uploader::uploadErrorEventCallback(Lorg/moxieapps/gwt/uploader/client/File;ILjava/lang/String;)(file, errorCode, message);
-                                                                                                                      };
-                                                                                                                      }
-                                                                                                                      if (eventHandlers['upload_success_handler']) {
-                                                                                                                      options.upload_success_handler = function(file, serverData, responseReceived) {
-                                                                                                                      return self.@com.ait.toolkit.clientio.uploader.client.Uploader::uploadSuccessEventCallback(Lorg/moxieapps/gwt/uploader/client/File;Ljava/lang/String;Ljava/lang/String;)(file, responseReceived, serverData);
-                                                                                                                      };
-                                                                                                                      }
-                                                                                                                      if (eventHandlers['upload_complete_handler']) {
-                                                                                                                      options.upload_complete_handler = function(file) {
-                                                                                                                      return self.@com.ait.toolkit.clientio.uploader.client.Uploader::uploadCompleteEventCallback(Lorg/moxieapps/gwt/uploader/client/File;)(file);
-                                                                                                                      };
-                                                                                                                      }
+		// Add in GWT interceptor callback functions for the various event handlers
+		if (eventHandlers['swfupload_loaded_handler']) {
+			options.swfupload_loaded_handler = function() {
+				return self.@com.ait.toolkit.clientio.uploader.client.Uploader::swfUploadLoadedEventCallback()();
+			};
+		}
+		if (eventHandlers['file_dialog_start_handler']) {
+			options.file_dialog_start_handler = function() {
+				return self.@com.ait.toolkit.clientio.uploader.client.Uploader::fileDialogStartEventCallback()();
+			};
+		}
+		if (eventHandlers['file_queued_handler']) {
+			options.file_queued_handler = function(file) {
+				return self.@com.ait.toolkit.clientio.uploader.client.Uploader::fileQueuedEventCallback(Lcom/ait/toolkit/clientio/uploader/client/File;)(file);
+			};
+		}
+		if (eventHandlers['file_queue_error_handler']) {
+			options.file_queue_error_handler = function(file, errorCode,
+					message) {
+				return self.@com.ait.toolkit.clientio.uploader.client.Uploader::fileQueueErrorEventCallback(Lcom/ait/toolkit/clientio/uploader/client/File;ILjava/lang/String;)(file, errorCode, message);
+			};
+		}
+		if (eventHandlers['file_dialog_complete_handler']) {
+			options.file_dialog_complete_handler = function(
+					numberOfFilesSelected, numberOfFilesQueued,
+					totalFilesInQueue) {
+				return self.@com.ait.toolkit.clientio.uploader.client.Uploader::fileDialogCompleteEventCallback(III)(numberOfFilesSelected, numberOfFilesQueued, totalFilesInQueue);
+			};
+		}
+		if (eventHandlers['upload_start_handler']) {
+			options.upload_start_handler = function(file) {
+				return self.@com.ait.toolkit.clientio.uploader.client.Uploader::uploadStartEventCallback(Lcom/ait/toolkit/clientio/uploader/client/File;)(file);
+			};
+		}
+		if (eventHandlers['upload_progress_handler']) {
+			options.upload_progress_handler = function(file, bytesComplete,
+					bytesTotal) {
+				return self.@com.ait.toolkit.clientio.uploader.client.Uploader::uploadProgressEventCallback(Lcom/ait/toolkit/clientio/uploader/client/File;DD)(file, bytesComplete, bytesTotal);
+			};
+		}
+		if (eventHandlers['upload_error_handler']) {
+			options.upload_error_handler = function(file, errorCode, message) {
+				return self.@com.ait.toolkit.clientio.uploader.client.Uploader::uploadErrorEventCallback(Lcom/ait/toolkit/clientio/uploader/client/File;ILjava/lang/String;)(file, errorCode, message);
+			};
+		}
+		if (eventHandlers['upload_success_handler']) {
+			options.upload_success_handler = function(file, serverData,
+					responseReceived) {
+				return self.@com.ait.toolkit.clientio.uploader.client.Uploader::uploadSuccessEventCallback(Lcom/ait/toolkit/clientio/uploader/client/File;Ljava/lang/String;Ljava/lang/String;)(file, responseReceived, serverData);
+			};
+		}
+		if (eventHandlers['upload_complete_handler']) {
+			options.upload_complete_handler = function(file) {
+				return self.@com.ait.toolkit.clientio.uploader.client.Uploader::uploadCompleteEventCallback(Lcom/ait/toolkit/clientio/uploader/client/File;)(file);
+			};
+		}
 
-                                                                                                                      return new $wnd.SWFUpload(options);
-                                                                                                                      }-*/;
+		return new $wnd.SWFUpload(options);
+    }-*/;
 
     @SuppressWarnings( { "UnusedDeclaration" } )
     private boolean swfUploadLoadedEventCallback() {
@@ -2212,43 +2218,43 @@ public class Uploader extends AbsolutePanel {
     }
 
     private static native boolean nativeSWFUploadDestroy( JavaScriptObject swfUpload ) /*-{
-                                                                                       return swfUpload.destroy();
-                                                                                       }-*/;
+		return swfUpload.destroy();
+    }-*/;
 
     private static native JsArray nativeGetSelectedFiles( Element fileInputElement ) /*-{
-                                                                                     return fileInputElement.files;
-                                                                                     }-*/;
+		return fileInputElement.files;
+    }-*/;
 
     // We're using native objects instead of Java objects in order to keep the rest of the code compatible with
     // the native types returned by SWFUpload
     private static native JavaScriptObject nativeUpdateFileProperties( JavaScriptObject file, int fileStatus ) /*-{
-                                                                                                               file.modificationdate = file.lastModifiedDate;
-                                                                                                               file.filestatus = fileStatus;
-                                                                                                               return file;
-                                                                                                               }-*/;
+		file.modificationdate = file.lastModifiedDate;
+		file.filestatus = fileStatus;
+		return file;
+    }-*/;
 
     private static native void nativeSetProperty( JavaScriptObject obj, String key, double value ) /*-{
-                                                                                                   obj[key] = value;
-                                                                                                   }-*/;
+		obj[key] = value;
+    }-*/;
 
     private static native void nativeSetProperty( JavaScriptObject obj, String key, String value ) /*-{
-                                                                                                   obj[key] = value;
-                                                                                                   }-*/;
+		obj[key] = value;
+    }-*/;
 
     private static native void nativeAddValueToArray( JavaScriptObject obj, String key, double value ) /*-{
-                                                                                                       if (!obj[key]) {
-                                                                                                       obj[key] = new Array();
-                                                                                                       }
-                                                                                                       obj[key].push(value);
-                                                                                                       }-*/;
+		if (!obj[key]) {
+			obj[key] = new Array();
+		}
+		obj[key].push(value);
+    }-*/;
 
     private static native double nativeGetPropertyAsDouble( JavaScriptObject obj, String key ) /*-{
-                                                                                               return obj[key] ? obj[key] : 0.0;
-                                                                                               }-*/;
+		return obj[key] ? obj[key] : 0.0;
+    }-*/;
 
     private static native JsArrayNumber nativeGetPropertyAsArray( JavaScriptObject obj, String key ) /*-{
-                                                                                                     return obj[key] ? obj[key] : new Array();
-                                                                                                     }-*/;
+		return obj[key] ? obj[key] : new Array();
+    }-*/;
 
     /**
      * Implementation of SWFUpload Speed plug-in's moving average calculation based on the
@@ -2309,7 +2315,7 @@ public class Uploader extends AbsolutePanel {
 
     @SuppressWarnings( { "UnusedDeclaration" } )
     private native void consoleDebug( String msg ) /*-{
-                                                   $wnd.console.debug(msg);
-                                                   }-*/;
+		$wnd.console.debug(msg);
+    }-*/;
 
 }
