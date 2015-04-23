@@ -1,0 +1,6 @@
+<module>
+    <inherits name='com.google.gwt.user.User'/>
+    <inherits name="com.google.gwt.json.JSON"/>
+    <script src="swfupload.js"/>
+    <script src="swfupload.speed.js"/>
+</module>
