@@ -15,6 +15,7 @@
  */
 package com.ait.toolkit.clientio.client;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
@@ -24,6 +25,7 @@ import com.ait.toolkit.clientio.client.eventhandling.ClientIOInitHandler;
 import com.ait.toolkit.clientio.client.eventhandling.ClientIoFileSaveHandler;
 import com.ait.toolkit.clientio.client.eventhandling.ClientIoFileSelectHandler;
 import com.ait.toolkit.clientio.client.eventhandling.DefaultClientIOInitHandler;
+import com.ait.toolkit.core.client.Color;
 import com.ait.toolkit.flash.core.client.events.CallbackRegistration;
 import com.ait.toolkit.flash.core.client.events.Event;
 import com.ait.toolkit.flash.core.client.events.IOErrorEvent;
@@ -279,13 +281,11 @@ public class ClientIO {
     }
 
     public static void browse() {
-        FileFilter fileFilter = new FileFilter( "Open a file", "*" );
-        browse( BROWSE_MESSAGE, fileFilter );
+        browse( BROWSE_MESSAGE, new ArrayList<FileFilter>() );
     }
 
     public static void browse( String message ) {
-        FileFilter fileFilter = new FileFilter( message, "*" );
-        browse( message, fileFilter );
+        browse( message, new ArrayList<FileFilter>() );
     }
 
     public static void browse( FileFilter... fileFilter ) {
@@ -294,6 +294,10 @@ public class ClientIO {
 
     public static void browse( int closeDelay, FileFilter... fileFilter ) {
         browse( BROWSE_MESSAGE, closeDelay, fileFilter );
+    }
+
+    public static void setBackgroundColor( Color color ) {
+        setBackgroundColor( color.getValue() );
     }
 
     public static void setBackgroundColor( String value ) {
@@ -305,6 +309,8 @@ public class ClientIO {
     public static void setLabel( String value ) {
         if( wasInitiated ) {
             ClientIOSwf.get().setLabel( value );
+            ClientIOSwf.get().setFontColor( Color.WHITE.getValue() );
+            ClientIOSwf.get().setFontSize( 15 );
         }
     }
 
@@ -399,7 +405,7 @@ public class ClientIO {
 
     static native void _reset()/*-{
 		var root = $wnd.FABridge["Flash4j"].root();
-		root.setdata(null);
+		root.clearAll();
     }-*/;
 
     private static native void _saveFile( Object data, String fileName )/*-{
